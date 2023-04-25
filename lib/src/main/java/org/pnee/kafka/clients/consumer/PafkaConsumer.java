@@ -26,6 +26,7 @@ import java.util.stream.Stream;
  *     Stream<ConsumerRecord<String, String>> results = consumer
  *         .withAssignment(topicPartitionAssignments)
  *         .withTimeout(duration)
+ *         .withCommitStrategy(CommitStrategy.AUTO)
  *         .autoPoll();
  *
  *     // autoPoll with Manual commit
@@ -78,6 +79,7 @@ public class PafkaConsumer<K, V> {
     public static enum CommitStrategy {
         ON_POLL,
         ON_TIME,
+        AUTO,
     }
 
     public static class Builder {
