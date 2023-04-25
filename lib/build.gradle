@@ -25,4 +25,6 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:31.1-jre'
+
+    implementation 'org.apache.kafka:kafka-clients:3.4.0'
 }
