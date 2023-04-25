@@ -43,21 +43,29 @@ import java.util.stream.Stream;
 public class PafkaConsumer<K, V> {
 
     private final Time time;
+    private DefaultPafkaExceptionHandler handler;
 
     public PafkaConsumer(final Map<String, Object> configs) {
         this.time = Time.SYSTEM;
 
     }
 
-    public PafkaConsumer withAssignment(Collection<TopicPartition> partitions) {
+    public PafkaConsumer withAssignment(final Collection<TopicPartition> partitions) {
         return null;
     }
 
-    public PafkaConsumer withSubscription(Collection<String> topics) {
+    public PafkaConsumer withSubscription(final Collection<String> topics) {
         return null;
     }
 
-    public PafkaConsumer withSubscription(Pattern pattern) {
+    public PafkaConsumer withSubscription(final Pattern pattern) {
+        return null;
+    }
+
+    public PafkaConsumer withExceptionHandler(final PafkaExceptionHandler handler) {
+        if (handler == null) {
+            this.handler = new DefaultPafkaExceptionHandler();
+        }
         return null;
     }
 
@@ -121,6 +129,13 @@ public class PafkaConsumer<K, V> {
 
         public PafkaConsumer build() {
             return new PafkaConsumer(configs);
+        }
+    }
+
+    private class DefaultPafkaExceptionHandler {
+        public void handle(Exception exception) {
+            // just trolling
+            throw new RuntimeException(exception);
         }
     }
 }
